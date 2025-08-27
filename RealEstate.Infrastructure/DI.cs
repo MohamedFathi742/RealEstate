@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using RealEstate.Application.Interfaces;
 using RealEstate.Domain.Entities;
 using RealEstate.Infrastructure.Persistence;
+using RealEstate.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +31,8 @@ public static class DI
      .AddEntityFrameworkStores<ApplicationDbContext>()
      .AddDefaultTokenProviders();
 
-
+        services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+        services.AddScoped<IPropertyRepository,PropertyRepository>();
 
 
         return services;
