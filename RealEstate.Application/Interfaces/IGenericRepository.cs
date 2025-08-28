@@ -12,8 +12,8 @@ public interface IGenericRepository<T> where T : class
     Task <T?> GetByIdAsync(int id);
     Task<IEnumerable<T>> FindAsync(Expression<Func<T,bool>>predicate);
     Task AddAsync(T entity);
-    void Updatesync(T entity);
-    void RemoveAsync(T entity);
+    Task UpdatAesync(T entity);
+    Task RemoveAsync(T entity);
     Task SaveChangesAsync();
 
 

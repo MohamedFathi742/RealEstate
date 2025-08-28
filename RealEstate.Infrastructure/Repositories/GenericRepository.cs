@@ -21,23 +21,32 @@ public class GenericRepository<T> (ApplicationDbContext context): IGenericReposi
     
 
     public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)=>await _dbset.Where(predicate).ToListAsync();
-  
-
-
-    public async Task AddAsync(T entity)=> await _dbset.AddAsync(entity);
-   
 
 
 
-    public  void Updatesync(T entity)=>  _dbset.Update(entity);
+    public async Task AddAsync(T entity)
+    {
+        await _dbset.AddAsync(entity);
+         await _context.SaveChangesAsync();
+    }
 
+    public async Task UpdatAesync(T entity)
+    {
+        _dbset.Update(entity);
+        await _context.SaveChangesAsync();
+      
+    }
 
+    public async Task RemoveAsync(T entity)
+    {
+        
 
-    public async void RemoveAsync(T entity) => _dbset.Remove(entity);
-   
+        _dbset.Remove(entity);
+        await _context.SaveChangesAsync();
+    }
 
     public async Task SaveChangesAsync()=>await _context.SaveChangesAsync();
-   
 
    
+    
 }

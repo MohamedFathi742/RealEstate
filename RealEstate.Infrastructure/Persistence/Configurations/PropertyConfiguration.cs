@@ -14,7 +14,7 @@ public class PropertyConfiguration : IEntityTypeConfiguration<Property>
     {
         builder.HasKey(p => p.Id);
 
-        builder.Property(p => p.Titel)
+        builder.Property(p => p.Title)
             .IsRequired()
             .HasMaxLength(200);
 
@@ -30,7 +30,8 @@ public class PropertyConfiguration : IEntityTypeConfiguration<Property>
 
         builder.Property(p => p.ImagePath)
         .IsRequired()
-        .HasMaxLength(500);
+        .HasMaxLength(500)
+        .HasDefaultValue("default.png");
 
 
         builder.HasOne(p => p.Owner)
